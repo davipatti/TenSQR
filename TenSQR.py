@@ -24,10 +24,29 @@ parser.add_argument(
         "Prefix for outputs. Must match prefix of 'SNV_pos.txt', 'SNV_matrix.txt', "
         "'lowQSseq.txt' and 'Homo_seq.txt'"
     ),
+    required=True,
 )
-parser.add_argument("--err_rate", type=float, help="Sequencing error rate (percent).")
-parser.add_argument("--MEC_thre", type=float, help="MEC improvement threshold")
-parser.add_argument("--K", type=float, help="Initial population size.")
+parser.add_argument(
+    "--err_rate",
+    type=float,
+    help="Sequencing error rate (percent) (default=0.2).",
+    default=0.2,
+    required=False,
+)
+parser.add_argument(
+    "--MEC_thre",
+    type=float,
+    help="MEC improvement threshold (default=0.0312).",
+    default=0.0312,
+    required=False,
+)
+parser.add_argument(
+    "--K",
+    type=float,
+    help="Initial population size (default=5).",
+    default=5,
+    required=False,
+)
 args = parser.parse_args()
 
 zone_name = args.zone_name
