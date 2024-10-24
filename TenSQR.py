@@ -147,7 +147,7 @@ while K_table[1] - K_table[0] != 1:  # stopping criteria for rank estimation
                 num_V = 1
                 reconV = np.zeros((R, hap_len), dtype=int)  # reconstructed haplotypes
                 # successive clustering
-                while R != 0 and len(M_E[:, 0]) > R:
+                while 0 < R < min(TM_E.shape) and len(M_E[:, 0]) > R:
                     print("R = " + str(R))
                     P_matrix = np.double(M_E != 0)  # updated projection matrix
                     P_tensor = np.tile(
