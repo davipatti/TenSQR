@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys
+import argparse
 import numpy as np
 import scipy as sp
 import random
@@ -17,16 +17,27 @@ def ACGT_count(M_E):
     return out
 
 
-config_file = open(sys.argv[1], "r")
-config = config_file.readlines()
-config_file.close()
+parser = argparse.ArgumentParser("TenSQR.py")
+parser.add_argument(
+    "--zone_name",
+    help=(
+        "Prefix for outputs. Must match prefix of 'SNV_pos.txt', 'SNV_matrix.txt', "
+        "'lowQSseq.txt' and 'Homo_seq.txt'"
+    ),
+)
+parser.add_argument("--err_rate", type=float, help="Sequencing error rate (%).")
+parser.add_argument("--MEC_thre", type=float, help="MEC improvement threshold")
+parser.add_argument("--K", type=float, help="Initial population size.")
+parser.add_argument("--window_start", type=int)
+parser.add_argument("--window_end", type=int)
+args = parser.parse_args()
 
-zone_name = config[8].split(":")[-1].replace(" ", "").replace("\n", "")
-err_rate = float(config[9].split(":")[-1])
-MEC_thre = float(config[10].split(":")[-1])
-K = float(config[11].split(":")[-1])
-window_start = int(config[3].split(":")[-1])
-window_end = int(config[4].split(":")[-1])
+zone_name = args.zone_name
+err_rate = args.err_rate
+MEC_thre = args.MEC_thre
+K = args.K
+window_start = args.window_start
+window_end = args.window_end
 
 # prameter setting
 seq_err = err_rate / 100  # sequencing error rate^M
