@@ -28,16 +28,12 @@ parser.add_argument(
 parser.add_argument("--err_rate", type=float, help="Sequencing error rate (%).")
 parser.add_argument("--MEC_thre", type=float, help="MEC improvement threshold")
 parser.add_argument("--K", type=float, help="Initial population size.")
-parser.add_argument("--window_start", type=int)
-parser.add_argument("--window_end", type=int)
 args = parser.parse_args()
 
 zone_name = args.zone_name
 err_rate = args.err_rate
 MEC_thre = args.MEC_thre
 K = args.K
-window_start = args.window_start
-window_end = args.window_end
 
 # prameter setting
 seq_err = err_rate / 100  # sequencing error rate^M
