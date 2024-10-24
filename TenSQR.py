@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import collections
 import numpy as np
 import scipy as sp
 import random
@@ -68,7 +67,7 @@ for thre in range(1, max_thre + 1):
             L.append(l)
             break
 L[0] += 1
-mis_cri = np.zeros((num_read), dtype=np.int)  # criteria of mismatches for each read
+mis_cri = np.zeros((num_read), dtype=int)  # criteria of mismatches for each read
 for i in range(num_read):
     for l in range(len(Th)):
         if nongap[i] < L[l]:
