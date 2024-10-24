@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import numpy as np
@@ -25,7 +25,7 @@ parser.add_argument(
         "'lowQSseq.txt' and 'Homo_seq.txt'"
     ),
 )
-parser.add_argument("--err_rate", type=float, help="Sequencing error rate (%).")
+parser.add_argument("--err_rate", type=float, help="Sequencing error rate (percent).")
 parser.add_argument("--MEC_thre", type=float, help="MEC improvement threshold")
 parser.add_argument("--K", type=float, help="Initial population size.")
 args = parser.parse_args()
