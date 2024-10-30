@@ -77,7 +77,7 @@ if __name__ == "__main__":
     Homoseqname = zone_name + "_Homo_seq.txt"  # homo sequence name
 
     # import SNV matrix
-    SNVmatrix = np.loadtxt(SNVmatrixname)
+    SNVmatrix = np.loadtxt(SNVmatrixname, ndmin=2)
     SNVmatrix = SNVmatrix.astype(int)
     ori_ACGTcount = ACGT_count(SNVmatrix)  # original ACGT statistics
 
