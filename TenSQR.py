@@ -387,9 +387,8 @@ if __name__ == "__main__":
                     ):
                         # one more majority voting after getting all the haplptypes
                         index = np.zeros(ori_num_read)  # indices for all the reads
-                        iden_table = np.zeros(
-                            (ori_num_read, num_V - 1)
-                        )  #  talbe of number of identical nucleotides
+                        # table of number of identical nucleotides
+                        iden_table = np.zeros((ori_num_read, num_V - 1))
                         for i in range(num_V - 1):
                             iden_table[:, i] = (SNVmatrix - reconV[i, :] == 0).sum(
                                 axis=1
@@ -437,7 +436,7 @@ if __name__ == "__main__":
                         true_ind = np.zeros(num_read)  # final indices of reads
                         iden_table = np.zeros(
                             (num_read, len(reconV2[:, 0]))
-                        )  #  talbe of number of identical nucleotides
+                        )  # table of number of identical nucleotides
                         for i in range(len(reconV2[:, 0])):
                             iden_table[:, i] = (SNVmatrix - reconV2[i, :] == 0).sum(
                                 axis=1
@@ -524,9 +523,7 @@ if __name__ == "__main__":
     (m, n) = eval("reconVK" + str(int(MEC_table[0, i])) + ".shape")
     reconV2 = eval("reconVK" + str(int(MEC_table[0, i])))
     index = np.zeros(ori_num_read)  # indices for all the reads
-    iden_table = np.zeros(
-        (ori_num_read, m)
-    )  #  talbe of number of identical nucleotides
+    iden_table = np.zeros((ori_num_read, m))  # table of number of identical nucleotides
     for i in range(m):
         iden_table[:, i] = (SNVmatrix - reconV2[i, :] == 0).sum(
             axis=1
