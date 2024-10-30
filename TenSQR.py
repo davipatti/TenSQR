@@ -609,16 +609,10 @@ if __name__ == "__main__":
     Value = list(Hashtable.values())
     index = np.argsort(np.array(Value))[::-1]
 
-    filename = zone_name + "_ViralSeq.txt"
-    f = open(filename, "w")
-    for i in range(len(index)):
-        print("Frequency of strain" + str(i + 1) + "_fre : " + str(Value[index[i]]))
-        f.write(
-            "Viral Quasispecies - strain"
-            + str(i + 1)
-            + "_fre : "
-            + str(Value[index[i]])
-            + "\n"
-        )
-        f.write(Key[index[i]] + "\n")
-    f.close()
+    with open(zone_name + "_ViralSeq.fasta", "w") as f:
+        for i in range(len(index)):
+            freq = Value[index[i]]
+            sequence = Key[index[i]]
+            print(f"Frequency of strain {i + 1}: {freq:f}")
+            f.write(f">strain_{i + 1} freq: {freq:f}\n")
+            f.write(f"{sequence}\n")
