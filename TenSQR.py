@@ -9,9 +9,20 @@ import time
 from scipy.stats import binom
 
 
-# get the ACGT statistics of a read matrix
 def ACGT_count(M_E):
-    out = np.zeros((len(M_E[0, :]), 4))
+    """
+    ACGT statistics of a read matrix.
+
+    Args:
+        M_E: (n_reads, n_SNVs) array
+
+    Returns:
+        (n_SNVs, 4) array containing the count of each A, C, G and T in each SNV.
+    """
+    if M_E.ndim != 2:
+        raise ValueError("arr should be 2D")
+    n_snvs = M_E.shape[1]
+    out = np.zeros((n_snvs, 4))
     for i in range(4):
         out[:, i] = (M_E == (i + 1)).sum(axis=0)
     return out
