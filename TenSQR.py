@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
 import argparse
+import math
+import random
+import sys
+import time
+
 import numpy as np
 import scipy as sp
-import random
-import math
-import time
 from scipy.stats import binom
 
 
@@ -77,17 +79,29 @@ if __name__ == "__main__":
     Homoseqname = zone_name + "_Homo_seq.txt"  # homo sequence name
 
     # import SNV matrix
-    SNVmatrix = np.loadtxt(SNVmatrixname, ndmin=2)
-    SNVmatrix = SNVmatrix.astype(int)
+    SNVmatrix = np.loadtxt(SNVmatrixname, ndmin=2).astype(int)
+
+    if len(SNVmatrix) == 0:
+        print(
+            f"SNV matrix ({SNVmatrixname}) is empty. Not running QSR.", file=sys.stderr
+        )
+        exit()
+
     ori_ACGTcount = ACGT_count(SNVmatrix)  # original ACGT statistics
 
     # import SNV position
-    SNVpos = np.loadtxt(SNVposname)
-    SNVpos = SNVpos.astype(int)
+    SNVpos = np.loadtxt(SNVposname).astype(int)
+
+    if len(SNVpos) != SNVmatrix.shape[0]:
+        raise ValueError(
+            f"{SNVposname} and {SNVmatrixname} have different numbers of SNVs. Number of columns "
+            "in the SNV matrix should match the number of elements in SNV positions."
+        )
+
     tStart = time.time()  # starting time
 
     # threshold for read assignment of the most dominant haplotype based on p-value
-    (num_read, hap_len) = SNVmatrix.shape  # number of reads, length of haplotypes
+    num_read, hap_len = SNVmatrix.shape  # number of reads, length of haplotypes
     P_matrix = np.double(SNVmatrix != 0)  # projection matrix
     P_tensor = np.tile(P_matrix, (1, 4))  # projection matrix of tensor structure
     nongap = P_matrix.sum(axis=1)  # number of nongap positions of each read
