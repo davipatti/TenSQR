@@ -92,10 +92,10 @@ if __name__ == "__main__":
     # import SNV position
     SNVpos = np.loadtxt(SNVposname).astype(int)
 
-    if len(SNVpos) != SNVmatrix.shape[0]:
+    if len(SNVpos) != SNVmatrix.shape[1]:
         raise ValueError(
-            f"{SNVposname} and {SNVmatrixname} have different numbers of SNVs. Number of columns "
-            "in the SNV matrix should match the number of elements in SNV positions."
+            f"{SNVposname} and {SNVmatrixname} have different numbers of SNVs.\n"
+            "Number of columns in the SNV matrix should match the number of SNV positions."
         )
 
     tStart = time.time()  # starting time
